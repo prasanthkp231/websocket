@@ -16,7 +16,7 @@
     </style>
   </head>
   <body>
-    <ul id="messages"></ul>
+    <input id="mcnt" value="0" /><input id="messages" />
     <form id="form" action="">
       <input id="input" autocomplete="off" /><button>Send</button>
     </form>
@@ -24,10 +24,11 @@
 
     <script>
       var socket = io();
-
+      var msgCount=0;
       var messages = document.getElementById('messages');
       var form = document.getElementById('form');
       var input = document.getElementById('input');
+      var mcnt = document.getElementById('mcnt');
 
       form.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -38,9 +39,8 @@
       });
 
       socket.on('chat message', function(msg) {
-        var item = document.createElement('li');
-        item.textContent = msg;
-        messages.appendChild(item);
+        messages.value=msg;
+        mcnt.value=msgCount++;
         window.scrollTo(0, document.body.scrollHeight);
       });
     </script>
