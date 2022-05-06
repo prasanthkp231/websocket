@@ -47,9 +47,9 @@
 	window.onload = displayClock();
 	function displayClock(){
 	  var d = new Date();
-	  var h=d.getSeconds();
-	  if(h>30 && socket.connected) socket.close();
-	  if(h<30 && !socket.connected) socket.open();
+	  var h=d.getHours();
+	  if(h==20 && socket.connected) socket.close();
+	  if(h==9 && !socket.connected) socket.open();
 	  document.getElementById('clock').innerHTML = d.toLocaleTimeString();
 	  setTimeout(displayClock, 1000); 
 	}
